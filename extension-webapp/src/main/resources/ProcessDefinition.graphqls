@@ -1,0 +1,9 @@
+type ProcessDefinition @doc(d: "An object structure representing an executable process composed of activities and transitions.")
+{
+    id: String
+    name: String
+    isSuspended: Boolean @doc(d: "Returns true if the process definition is in suspended state.")
+    version: String @doc(d: "Version tag of the process definition.")
+    key: String
+
+}

@@ -1,0 +1,62 @@
+type Book{
+    title: String!
+    isbn: String!
+}
+
+
+
+type Query{
+
+    getBook(isbn:String!):Book
+
+    user(
+        id: String! @doc(d: "Only select a user by user id")
+    ): User
+
+    users(
+        firstName: String @doc(d: "Only select users with the given first name")
+        firstNameLike: String @doc(d: "Only select users with a first name matching the parameter. The syntax is that of SQL: for example usage: nameLike: \"%camunda%\"")
+        groupId: String @doc(d: "The group of user belongs to")
+    ): [User]
+    
+    processDefinition(
+        id: String!
+    ): ProcessDefinition
+
+    processDefinitions(
+        isSuspended: Boolean @doc(d: "process definition suspended state. true: get process definitions in suspended state, ommitted: get all process definitions")
+        latest: Boolean @doc(d: "Only select the process definitions which are the latest deployed (ie. which have the highest version number for the given key). ")
+    ): [ProcessDefinition]
+
+    groups(
+        name: String @doc(d: "Only select groups with the given name")
+        nameLike: String @doc(d: "Only select groups with a name matching the parameter. The syntax is that of SQL: for example usage: nameLike(%camunda%)")
+        type: String @doc(d: "Only select specific type of groups")
+    ): [Group]
+
+    group(
+        id: String! @doc(d: "Only select a group by group id")
+    ): Group
+
+    processInstances(
+    	businessKey: String @doc(d: "Only select process instances with a certain business key.")
+   	): [ProcessInstance]
+
+    tasks(
+        assignee: String @doc(d: "Only select tasks which are assigned to the given user.")
+        name: String @doc(d: "Only select tasks with the given name")
+        nameLike: String @doc(d: "Only select tasks with a name matching the parameter. The syntax is that of SQL: for example usage: nameLike(%activiti%)")
+    )
+    : [Task]
+    @doc(d: "Allows programmatic querying of Tasks based on the public Interface org.camunda.bpm.engine.task.TaskQuery")
+
+	task(
+		id: String!
+	): Task
+
+    taskVariables(
+        taskId: String!
+        names: [String]
+    ): [KeyValuePair]
+}
+
