@@ -37,13 +37,13 @@ public class TaskQueryResolver implements GraphQLQueryResolver {
 
     }
 
-    public List<Task> tasks(String assignee, String name, String nameLike) {
+    public List<Task> tasks(int offset, int limit, String assignee, String name, String nameLike) {
         TaskQuery taskQuery = taskService.createTaskQuery();
         taskQuery = (assignee != null) ? taskQuery.taskAssignee(assignee):taskQuery;
         taskQuery = (name != null) ? taskQuery.taskName(name):taskQuery;
         taskQuery = (nameLike != null) ? taskQuery.taskNameLike(nameLike):taskQuery;
         taskQuery.initializeFormKeys();
-        return taskQuery.list();
+        return taskQuery.listPage(offset,limit);
     }
 
     public Task task(String id) {

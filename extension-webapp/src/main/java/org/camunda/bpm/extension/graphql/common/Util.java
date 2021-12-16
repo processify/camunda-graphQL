@@ -6,6 +6,7 @@ import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.impl.application.ProcessApplicationManager;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.impl.value.ObjectValueImpl;
@@ -14,9 +15,9 @@ import org.camunda.bpm.engine.variable.value.TypedValue;
 import org.camunda.bpm.extension.graphql.types.KeyValuePair;
 import org.camunda.bpm.extension.graphql.types.ValueTypeEnum;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static org.camunda.spin.Spin.JSON;
 
@@ -86,4 +87,6 @@ public class Util {
         }
         return keyValuePairs;
     }
+
+
 }

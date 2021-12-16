@@ -33,9 +33,10 @@ public class ProcessInstanceQueryResolver implements GraphQLQueryResolver {
 
     }
 
-    public List<ProcessInstance> processInstances(String businessKey) {
+    public List<ProcessInstance> processInstances(String businessKey,String definitionId) {
     	ProcessInstanceQuery processInstanceQuery = runtimeService.createProcessInstanceQuery();
     	processInstanceQuery = (businessKey != null) ? processInstanceQuery.processInstanceBusinessKey(businessKey):processInstanceQuery;
+        processInstanceQuery = (definitionId != null) ? processInstanceQuery.processDefinitionId(definitionId):processInstanceQuery;
         return processInstanceQuery.list();
     }
 

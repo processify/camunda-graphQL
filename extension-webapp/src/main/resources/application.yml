@@ -1,6 +1,6 @@
 graphiql:
     endpoint:
         graphql: /camunda-graphql/graphql
-        subscriptions: /camunda-graphql/subscriptions
+        #subscriptions: /camunda-graphql/subscriptions
     servlet:
         exception-handlers-enabled: true

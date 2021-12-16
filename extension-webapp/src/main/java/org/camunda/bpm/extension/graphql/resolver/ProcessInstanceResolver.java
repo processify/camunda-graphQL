@@ -8,6 +8,8 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity;
+import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.repository.ProcessDefinitionQuery;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.extension.graphql.types.KeyValuePair;
@@ -52,6 +54,12 @@ public class ProcessInstanceResolver implements GraphQLResolver<ProcessInstance>
 
     public String getTenantId(ProcessInstance processInstance) {
         return processInstance.getTenantId();
+    }
+
+    public ProcessDefinition getDefinition(ProcessInstance processInstance) {
+        ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery();
+
+        return processDefinitionQuery.processDefinitionId(processInstance.getProcessDefinitionId()).singleResult();
     }
 
     public Boolean isEnded(ProcessInstance processInstance) {
